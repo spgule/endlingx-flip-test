@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EndlingX — Lonesome George</title>
+<style>
+:root{--lime:#CCFF00;--lime-ink:#a8d900;--ink:#0e100b;--muted:#8a8f7e;--line:#e6e8dc;--line-2:#d3d7c4;--paper-3:#eff1e6;--r:18px;--shadow-sm:0 10px 30px -18px rgba(20,24,8,.18);--shadow:0 24px 60px -28px rgba(20,24,8,.22)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:12px}
+.flip{perspective:1500px;width:min(360px,86vw);aspect-ratio:1/1;cursor:pointer;user-select:none}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .65s cubic-bezier(.3,.9,.3,1);transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.flip:hover .face{box-shadow:var(--shadow)}
+.front img{width:100%;height:100%;object-fit:cover;display:block;background:var(--paper-3)}
+.front .scrim{position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(transparent,rgba(14,16,11,.38) 42%,rgba(14,16,11,.92) 92%)}
+.card-top{position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;z-index:4}
+.tier-pill{font-family:'Archivo',sans-serif;font-weight:800;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:8px 13px;border-radius:8px;background:rgba(255,255,255,.92);color:var(--ink)}
+.tier-pill.t-lend{background:var(--lime);color:#000}.tier-pill.t-epic{background:var(--ink);color:var(--lime)}
+.card-id{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#fff;background:rgba(14,16,11,.55);padding:8px 11px;border-radius:8px;letter-spacing:.14em}
+.card-base{position:absolute;bottom:0;left:0;right:0;padding:0 22px 22px;z-index:4;color:#fff}
+.card-grupo{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.3em;color:var(--lime);text-transform:uppercase;margin-bottom:8px}
+.card-nome{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.32rem;line-height:1.14}
+.card-cient{font-size:.78rem;color:rgba(255,255,255,.75);font-style:italic;margin-top:4px}
+.card-meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.card-meta span{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:rgba(255,255,255,.85);text-transform:uppercase;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:4px 9px}
+.back{transform:rotateY(180deg);background:#fff;border:1px solid var(--line);padding:26px 24px 22px;display:flex;flex-direction:column}
+.back-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.back-head h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.14rem;line-height:1.18}
+.back-head .sub{color:var(--muted);font-style:italic;font-size:.76rem;margin-top:3px}
+.id-chip{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink);border:1px solid var(--line-2);border-radius:7px;padding:6px 10px;letter-spacing:.12em;white-space:nowrap}
+.rows{display:flex;flex-direction:column;margin-top:16px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7.5px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;flex-shrink:0}
+.row .v{font-size:.78rem;font-weight:600;text-align:right;color:var(--ink)}
+.row .v.lime{color:var(--lime-ink)}
+.row .v.cat{font-family:'Archivo',sans-serif;font-weight:800}
+.rank-line{background:#f7f8f2;border-radius:10px;padding:10px 12px;margin-top:8px;border:1px solid var(--line)}
+.rank-line .v{font-family:'Archivo',sans-serif;font-weight:800;font-size:.92rem}
+.back-hist{color:#3c4033;font-size:.74rem;line-height:1.5;font-style:italic;margin-top:10px;padding-left:10px;border-left:2px solid var(--lime)}
+.back-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px}
+.source{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+</style></head><body>
+<div class="flip" data-id="6">
+ <div class="flip-inner">
+  <div class="face front">
+    <img src="../gemini-v5/endling-pinta-island-tortoise.png" alt="Lonesome George">
+    <div class="scrim"></div>
+    <div class="card-top">
+      <span class="tier-pill t-lend">LEGENDARY 1/1</span>
+      <span class="card-id">Nº 0003</span>
+    </div>
+    <div class="card-base">
+      <div class="card-grupo">Endling</div>
+      <div class="card-nome">Lonesome George</div>
+      <div class="card-cient">Pinta island tortoise</div>
+      <div class="card-meta"><span>—</span><span>Extinct (EX)</span></div>
+    </div>
+  </div>
+  <div class="face back">
+    <div class="back-head">
+      <div><h3>Lonesome George</h3><div class="sub">Pinta island tortoise</div></div>
+      <span class="id-chip">Nº 0003</span>
+    </div>
+    <div class="rows">
+      <div class="row"><span class="k">IUCN Status</span><span class="v cat">Extinct (EX)</span></div>
+      <div class="row"><span class="k">Group</span><span class="v">Endling</span></div>
+      <div class="row"><span class="k">Habitat</span><span class="v">—</span></div>
+      <div class="row"><span class="k">Population</span><span class="v ">0 in the wild — extinct (2012)</span></div>
+      <div class="row"><span class="k">Trend</span><span class="v">Extinct</span></div>
+      <div class="rank-line"><span class="k">OpenRarity Rank</span><span class="v">#3 / 5,011</span></div>
+      <div class="back-hist">Lonesome George, the last Pinta Island giant tortoise, died in the Galápagos in 2012.</div>
+    </div>
+    <div class="back-foot">
+      <span class="source">IUCN Red List</span>
+      <a class="source" href="https://en.wikipedia.org/wiki/Pinta_Island_tortoise" target="_blank" rel="noopener">View source ↗</a>
+    </div>
+  </div>
+ </div>
+</div>
+<script src="flip.js"></script>
+</body></html>
