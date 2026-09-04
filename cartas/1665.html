@@ -18,28 +18,27 @@
           border-radius:var(--r); overflow:hidden; background:#fff; border:1px solid var(--line);
           box-shadow:var(--shadow-sm); }
   .flip:hover .face { box-shadow:var(--shadow); }
+
+  /* ============ FRENTE: só a arte ============ */
   .front img { width:100%; height:100%; object-fit:cover; display:block; background:var(--paper-3); }
-  .front .scrim { position:absolute; inset:auto 0 0 0; height:55%;
-                   background:linear-gradient(transparent,rgba(14,16,11,.38) 42%,rgba(14,16,11,.92) 92%); }
-  .card-top { position:absolute; top:18px; left:20px; right:20px; display:flex;
-              justify-content:space-between; align-items:center; z-index:4; }
-  .grupo-pill { font-family:'Archivo',sans-serif; font-weight:800; font-size:.6rem; letter-spacing:.2em;
-                text-transform:uppercase; padding:8px 13px; border-radius:8px;
-                background:rgba(255,255,255,.92); color:var(--ink); }
-  .grupo-pill.endling { background:var(--lime); color:#000; }
-  .card-id { font-family:'JetBrains Mono',monospace; font-size:.66rem; color:#fff;
-             background:rgba(14,16,11,.55); padding:8px 11px; border-radius:8px; letter-spacing:.14em; }
-  .card-base { position:absolute; bottom:0; left:0; right:0; padding:0 22px 22px; z-index:4; color:#fff; }
-  .card-grupo { font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.3em;
-                color:var(--lime); text-transform:uppercase; margin-bottom:8px; }
-  .card-nome { font-family:'Archivo',sans-serif; font-weight:800; font-size:1.32rem; line-height:1.14; }
-  .card-cient { font-size:.78rem; color:rgba(255,255,255,.75); font-style:italic; margin-top:4px; }
-  .card-meta { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
-  .card-meta span { font-family:'JetBrains Mono',monospace; font-size:.58rem; letter-spacing:.14em;
-                    color:rgba(255,255,255,.85); text-transform:uppercase;
-                    border:1px solid rgba(255,255,255,.28); border-radius:6px; padding:4px 9px; }
+
+  /* tap hint — dedo pulsando */
+  .tap { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:5;
+         display:inline-flex; align-items:center; gap:8px;
+         background:rgba(255,255,255,.94); border:1.5px solid var(--ink);
+         padding:9px 16px 9px 13px; border-radius:999px; cursor:pointer;
+         font-family:'JetBrains Mono',monospace; font-size:.62rem; font-weight:700;
+         letter-spacing:.22em; color:var(--ink); text-transform:uppercase;
+         box-shadow:0 6px 22px -6px rgba(20,24,8,.35);
+         animation:tapfloat 2.4s ease-in-out infinite; }
+  .tap svg { width:16px; height:16px; stroke:var(--ink); }
+  .flip.flipped .tap { opacity:0; transition:opacity .2s; }
+  .flip:hover .tap { background:var(--lime); border-color:var(--ink); }
+  @keyframes tapfloat { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(-7px); } }
+
+  /* ============ VERSO: dossiê + história rolando ============ */
   .back { transform:rotateY(180deg); background:#fff; border:1px solid var(--line);
-          padding:26px 24px 22px; display:flex; flex-direction:column; }
+          padding:26px 24px 64px; display:flex; flex-direction:column; }
   .back-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
   .back-head h3 { font-family:'Archivo',sans-serif; font-weight:800; font-size:1.14rem; line-height:1.18; }
   .back-head .sub { color:var(--muted); font-style:italic; font-size:.76rem; margin-top:3px; }
@@ -53,11 +52,8 @@
   .row .k { font-family:'JetBrains Mono',monospace; font-size:.58rem; letter-spacing:.16em;
             color:var(--muted); text-transform:uppercase; flex-shrink:0; }
   .row .v { font-size:.78rem; font-weight:600; text-align:right; color:var(--ink); }
-  .row .v.lime { color:var(--lime-ink); }
   .row .v.cat { font-family:'Archivo',sans-serif; font-weight:800; }
   .row .v.dim { color:var(--muted); font-weight:500; font-style:italic; }
-  .hist { color:var(--ink-soft); font-size:.74rem; line-height:1.5; font-style:italic;
-          margin-top:10px; padding-left:10px; border-left:2px solid var(--lime); }
   .back-foot { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:12px; }
   .source { font-family:'JetBrains Mono',monospace; font-size:.6rem; color:var(--muted);
             letter-spacing:.1em; text-transform:uppercase; }
@@ -66,20 +62,38 @@
                display:inline-flex; align-items:center; gap:6px;
                border:1.5px solid var(--ink); padding:8px 13px; border-radius:8px; transition:all .25s; }
   .iucn-link:hover { background:var(--lime); border-color:var(--lime); color:#000; }
+
+  /* faixa de história — rolagem automática (lime, a assinatura do projeto) */
+  .story { position:absolute; left:0; right:0; bottom:0; overflow:hidden;
+           background:var(--lime); border-top:1px solid rgba(14,16,11,.22); padding:10px 0; }
+  .story .lab { position:absolute; left:0; top:0; bottom:0; z-index:2; display:flex; align-items:center;
+                background:var(--ink); color:var(--lime);
+                font-family:'JetBrains Mono',monospace; font-size:.58rem; font-weight:700;
+                letter-spacing:.24em; padding:0 12px 0 14px; }
+  .story .track { display:flex; width:max-content; animation:tick 42s linear infinite; }
+  .story:hover .track { animation-play-state:paused; }
+  .story span { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.04em;
+                color:var(--ink); white-space:nowrap; padding:0 4em; position:relative; }
+  .story span::after { content:'✦'; position:absolute; right:1em; color:rgba(14,16,11,.6); }
+  @keyframes tick { to { transform:translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .story .track { animation:none; }
+    .story span:nth-child(2) { display:none; }
+    .story span { white-space:normal; padding:0 5.5em 0 90px; }
+    .tap { animation:none; }
+  }
 </style></head><body>
 <div class="flip" data-id="1665">
  <div class="flip-inner">
   <div class="face front">
     <img src="../gemini-v5/panthera-uncia-22732.png" alt="Snow Leopard">
-    <div class="scrim"></div>
-    <div class="card-top">
-      <span class="grupo-pill">Mammals</span>
-      <span class="card-id">Nº 1665</span>
-    </div>
-    <div class="card-base">
-      <div class="card-nome">Snow Leopard</div>
-      <div class="card-cient">Panthera uncia</div>
-      <div class="card-meta"><span>Regional</span><span>Vulnerable</span></div>
+    <div class="tap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 11.5V5a1.5 1.5 0 0 1 3 0v6"/>
+        <path d="M12 10.5V4a1.5 1.5 0 0 1 3 0v6"/>
+        <path d="M15 10V5.5a1.5 1.5 0 0 1 3 0v8.5a7 7 0 0 1-7 7h-.4a7.5 7.5 0 0 1-6.9-4.5L2 12.6a1.6 1.6 0 0 1 2.7-1.6L6 13.6"/>
+      </svg>
+      Tap to flip
     </div>
   </div>
   <div class="face back">
@@ -93,12 +107,15 @@
       <div class="row"><span class="k">Habitat</span><span class="v">Savanna &amp; Grassland</span></div>
       <div class="row"><span class="k">Range</span><span class="v">Regional</span></div>
       <div class="row"><span class="k">Trend</span><span class="v">Decreasing</span></div>
-      <div class="row"><span class="k">Mature individuals</span><span class="v" style="color:#a8d900">2,710-3,386</span></div>
-      
+      <div class="row"><span class="k">Mature individuals</span><span class="v">2,710-3,386</span></div>
     </div>
     <div class="back-foot">
       <span class="source">Source: IUCN</span>
       <a class="iucn-link" href="https://www.iucnredlist.org/species/22732/50664030" target="_blank" rel="noopener">IUCN dossier ↗</a>
+    </div>
+    <div class="story">
+      <div class="lab">STORY</div>
+      <div class="track"><span>Snow Leopard (Panthera uncia) — Vulnerable. Mature individuals: 2,710-3,386. Trend: Decreasing. Habitat: Savanna &amp; Grassland. Source: IUCN Red List.</span><span>Snow Leopard (Panthera uncia) — Vulnerable. Mature individuals: 2,710-3,386. Trend: Decreasing. Habitat: Savanna &amp; Grassland. Source: IUCN Red List.</span></div>
     </div>
   </div>
  </div>
